@@ -1,0 +1,30 @@
+import javax.swing.SwingUtilities;
+
+import client.view.ProgressItem;
+import rsa.ProgressTracker;
+
+public class Tracker implements ProgressTracker {
+
+	private ProgressItem progressItem;
+	
+	public Tracker(ProgressItem item) {
+		this.progressItem = item;
+	}
+
+
+
+
+
+	@Override
+	public void onProgress(int ppmDelta) {
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				progressItem.getProgressBar().setValue(progressItem.getProgressBar().getValue() + ppmDelta); // Ökar hela tiden från vad den hade innan
+			}
+		});
+		
+	}
+
+}
